@@ -5,5 +5,34 @@
 		<title>13.2.4IE事件处理程序</title>
 	</head>
 	<body>
+		<input type="button" id="myBtn" value="attachEvent"/>
+		<input type="button" id="myBtn2" value="detachEvent"/>
+		<script>
+			let btn = document.getElementById("myBtn");
+			/**
+			 * 区别：onclick
+			 * this === window this 相当于window是个全局变量
+			 * 可以添加多个事件，执行顺序，从后往前
+			 * 
+			 */
+			btn.attachEvent("onclick", function() {
+				alert("Clicked!");
+				console.log(this === window);
+			});
+			btn.attachEvent("onclick", function() {
+				alert("Hello World!");
+			});
+			
+			/**
+			 * 无法解绑匿名函数
+			 */
+			let btn2 = document.getElementById("myBtn2");
+			let handler = function() {
+				alert("Clicked!");
+			}
+			btn2.attachEvent("onclick", handler);
+			btn2.detachEvent("onclick", handler);
+			
+		</script>
 	</body>
 </html>
