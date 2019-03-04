@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.4组合使用构造函数模式和原型模式</title>
+	</head>
+	<body>
+		<script>
+			console.log("------------------------6.2.4组合使用构造函数模式和原型模式-----------------------");
+			function Person (name,age,job) {
+				this.name = name;
+				this.age = age;
+				this.job = job;
+				this.friends = ['xuyuqiu','duanyujie'];
+			}
+			Person.prototype = {
+				constructor:Person,
+				sayName:function() {
+					console.log(this.name);
+				}
+			}
+			//指向新的原型
+			var person1 = new Person('lvxin',18,'web');
+			var person2 = new Person('zhengling',19,'test');
+			
+			
+			person1.friends.push('lizhiying');//
+			console.log(person1.friends);//['xuyuqiu','duanyujie','lizhiying']
+			console.log(person2.friends);//['xuyuqiu','duanyujie']
+			
+			console.log(person1.friends === person2.friends);//false
+			console.log(person1.sayName === person2.sayName);//true
+		</script>
+	</body>
+</html>

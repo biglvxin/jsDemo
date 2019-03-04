@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3.1理解原型对象</title>
+	</head>
+	<body>
+		<script>
+			 console.log("-------------------------------6.2.3.1理解原型对象-----------------------------");
+			 /**
+			  * 1.所有原型都会自动获得一个constructor(构造函数属性)，Person.prototype.constructor.
+			  * 2.Person(构造函数)的prototype属性指向Person Prototype（Person的原型）
+			  * 3.Person Prototype有构造函数（constructor）指向Person。
+			  * 4.person1有prototype属性指向Person Prototype，但没有自己的构造函数。
+			  */
+			 
+			 /**
+			  * 1. isPrototypeOf(),返回true/false,判断实例是否拥有某个原型
+			  * 2.Object.getPrototypeOf(),返回定义原型的字符名称(Preson.prototpe),得到实例的原型名称
+			  */
+			 function Person() {
+			 	
+			 }
+			 Person.prototype.name = 'lvxin';
+			 Person.prototype.age = 18;
+			 Person.prototype.job = 'web';
+			 Person.prototype.sayName = function() {
+			 	console.log(this.name);
+			 }
+			var person1 = new Person();
+			var person2 = new Person();
+			console.log(Person.prototype.isPrototypeOf(person1));//true
+			console.log(Person.prototype.isPrototypeOf(person2));//true
+			
+			
+			console.log(Object.getPrototypeOf(person1) == Person.prototype);//true
+			console.log(Object.getPrototypeOf(person1).name);
+			 
+			 /**
+			  * 1.寻找属性和方法的过程：从对象实例本身开始，再看原型对象，再看object对象
+			  * 2.不能用对象实例重写原型的值，实例和原型属性同名，实例会屏蔽原型的值。
+			  * 3.可以用 delete删除实例的属性
+			  * 4.hasOwnPrototype(),返回true/false,判断是否有自己的原型属性，即实例有自己的属性。
+			  */
+			 person1.name = "xuyuqiu";
+			 console.log(person1.name);//xuyuqiu 实例值
+			 console.log(person2.name);//lvxin  原型值
+			 delete person1.name;
+			 console.log(person1.name);//lvxin 原型值
+			 
+			 person1.name = "duanyujie";
+			 console.log(person1.hasOwnPrototype(name));//true;
+			 console.log(person2.hasOwnPrototype(name));//false;
+			 delete person1.name;
+			 console.log(person1.hasOwnPrototype(name));//false;
+			 
+		</script>
+	</body>
+</html>

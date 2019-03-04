@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.1.4窗口大小</title>
+	</head>
+	<body>
+		<script>
+			var pageWidth = window.innerWidth,
+			pageHeight = window.innerHeight;
+			console.log(pageWidth);
+			console.log(pageHeight);
+			if (typeof pageWidth != "number"){
+			if (document.compatMode == "CSS1Compat"){
+				console.log('css1Compat');
+				pageWidth = document.documentElement.clientWidth;
+				pageHeight = document.documentElement.clientHeight;
+			} else {
+				console.log(' no css1Compat');
+				pageWidth = document.body.clientWidth;
+				pageHeight = document.body.clientHeight;
+			}
+			}
+			console.log(pageWidth);
+			console.log(pageHeight);
+
+		</script>
+	</body>
+</html>

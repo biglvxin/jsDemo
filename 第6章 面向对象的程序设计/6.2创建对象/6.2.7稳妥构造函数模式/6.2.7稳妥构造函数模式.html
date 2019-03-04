@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.7稳妥构造函数模式</title>
+	</head>
+	<body>
+		<script>
+			console.log("------------------6.2.7稳妥构造函数模式--------------------");
+			/**
+			 * 1.没有公共的属性，方法也不引用this对象,返回对象
+			 * 2特点：
+			 * 	方法不用this引用
+			 * 	实例不用new来创造
+			 * 3.安全性高,外部只可以通过调用内部函数，来访问属性的值
+			 */
+			function Person(name,age,job) {
+				//没有属性
+				var o = new Object();
+				o.sayName = function() {
+					//不用this
+					console.log(name);
+				}
+				
+				return o;
+			}
+			//不用new
+			var friend = Person('lvxin',18,'web');
+			 friend.sayName();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.3组合继承</title>
+	</head>
+	<body>
+		<script>
+			console.log("--------------------6.3.3组合继承--------------------------");
+			/**
+			 * 1.原型链和借用构造来实现对实例属性的继承
+			 */
+			function SuperType(name) {
+				this.colors = ['red','blue','green'];
+				this.name = name;
+			}
+			SuperType.prototype.sayName = function() {
+				return this.name;
+			};
+			function SubType(name,age) {
+				SuperType.call(this,name);
+				this.age = age;
+			}
+			SubType.prototype = new SuperType();
+			SubType.prototype.constructor = SubType;
+			SubType.prototype.sayAge = function() {
+				return this.age;
+			}
+			
+			var instance1 = new SubType('lvxin',18);
+			instance1.colors.push('white'); //['red','blue','green','white']
+			console.log(instance1.colors);
+			console.log(instance1.sayName());//lvxin
+			console.log(instance1.sayAge());//18
+			var instance2 = new SubType('xuyuqiu',19);
+			console.log(instance2.colors);//['red','blue','green']
+			console.log(instance2.sayName());//xuyuqiu
+			console.log(instance2.sayAge());//19
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

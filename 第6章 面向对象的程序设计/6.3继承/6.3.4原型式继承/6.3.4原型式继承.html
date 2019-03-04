@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.4原型式继承</title>
+	</head>
+	<body>
+		<script>
+			/**
+			 * 1.值都共享
+			 * 2.Object.create(对象)方法也可以用来创建一个实例。
+			 */
+			console.log("-------------------6.3.4原型式继承-----------------------");
+			function object(o) {
+				function F() {}
+				F.prototype = o;
+				return new F();
+			}
+			var person = {
+				name:'lvxin',
+				friends:['duanyujie','xuyuqiu']
+			};
+			//var anotherPerson = new object(person);
+			var anotherPerson = Object.create(person);
+			anotherPerson.name = 'lizhiying';
+			anotherPerson.friends.push('liufan');
+			//var yetAnotherPerson = new object(person);
+			var yetAnotherPerson = Object.create(person);
+			yetAnotherPerson.name = 'xufengfeng';
+			yetAnotherPerson.friends.push('zhengling');
+			
+			console.log(person.friends);//['duanyujie','xuyuqiu','liufan','zhenglin']
+			console.log(person.name);//xufengfeng
+		</script>
+	</body>
+</html>

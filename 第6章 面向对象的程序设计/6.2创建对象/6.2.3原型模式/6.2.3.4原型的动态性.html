@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3.4原型的动态性</title>
+	</head>
+	<body>
+		<script>
+			console.log("---------------------6.2.3.4原型的动态性------------------");
+			/**
+			 * 1.动态性:先实例化，之后还可以加属性和方法，仍然可以访问到
+			 * 2.把原型修改成另一个对象，切断了现有的原型和之前已经存在的实例对象。
+			 * 3.创建一个构造函数，即有一个构造属性
+			 */
+			function Person() {
+				
+			}
+			var person = new Person();
+			Person.prototype.sayHi = function() {
+				console.log("say Hi");
+			}
+			person.sayHi();//say Hi
+			console.log(person.sayHi());//undefined   无返回值 
+			
+			
+			function Person2() {
+				
+			}
+			Person2.prototype = {
+				name:'lvxin',
+				age:18,
+				job:"web",
+				sayName:function() {
+					console.log(this.name);
+				}
+			}
+			var person2 = new Person();
+			person2.sayName();//error    person2实例和新的原型Person2.prototype没有关系，person2实例和原来的原型有关
+			
+		</script>
+	</body>
+</html>

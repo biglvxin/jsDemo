@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.2借用构造函数</title>
+	</head>
+	<body>
+		<script>
+			console.log("------------------------6.3.2借用构造函数--------------------------");
+			/**
+			 * 1.在子类构造函数中调用父类的构造函数
+			 * 2.可以传递参数给父类
+			 * 3.子类新的方法写在调用父类的之后。
+			 */
+			function SuperType() {
+				this.colors = ['red','bule','yello'];
+			}
+			function SubType() {
+				//继承
+				SuperType.call(this);
+				this.age = 29;
+			}
+			var instance1 = new SubType();
+			var instance2 = new SubType();
+			instance1.colors.push('white');
+			console.log(instance1.colors);//['blue','yellow','red','white']
+			console.log(instance1.age);//29
+			console.log(instance2.colors);//['blue','yellow','red']
+			console.log(instance2.age);//29
+			
+			
+			
+			
+			function SuperType1(name) {
+				this.colors = ['red','bule','yello'];
+				this.name = name;
+			}
+			function SubType1() {
+				//继承
+				SuperType1.call(this,'lvxin');
+				this.age = 29;
+			}
+			var instance11 = new SubType1();
+			var instance21 = new SubType1();
+			
+			
+			console.log(instance11.name);//lvxin
+			console.log(instance21.name);//lxin
+			
+			console.log(instance11.age);//29
+			console.log(instance21.age);//29
+			
+			console.log(instance11.colors);//['red','bule','yello','white']
+			instance11.colors.push('white');
+			console.log(instance21.colors);//['red','bule','yello']
+			
+			
+		</script>
+	</body>
+</html>

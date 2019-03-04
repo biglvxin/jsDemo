@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.4.1静态私有变量.html</title>
+	</head>
+	<body>
+		<script>
+			console.log("----------------7.4.1静态私有变量.html------------------");
+			(function() {
+				var privateVariable = 10;
+				function privateFunction() {
+					return false;
+				}
+				MyObject = function () {
+					
+				};
+				MyObject.prototype.publicMethod = function() {
+					privateVariable++;
+					return privateFunction();
+				};
+			})();
+			
+			var myObject = new MyObject();
+			var result = myObject.publicMethod();
+			console.log(result);//false;
+			
+			
+			(function() {
+				var name = '';
+				Person = function(value) {
+					name = value;
+				};
+				Person.prototype.getName = function() {
+					return name;
+				}
+				Person.prototype.setName = function(value) {
+					name = value;
+				}
+			})();
+			
+			var person1 = new Person('lvxin');
+			console.log(person1.getName());//lvxin
+			person1.setName('xuyuqiu');
+			console.log(person1.getName());//xyyuqiu
+			
+			
+			
+			var person2 = new Person('duanyujie');
+			console.log(person2.getName());//duanyujie
+			console.log(person1.getName());//duanyujie
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

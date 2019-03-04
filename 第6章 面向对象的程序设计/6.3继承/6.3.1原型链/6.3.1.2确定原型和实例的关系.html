@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.1.2确定原型和实例的关系</title>
+	</head>
+	<body>
+		<script>
+			console.log("----------------------------6.3.1.2确定原型和实例的关系----------------------------");
+			//定义父的构造函数(超类型函数)
+			function SuperType() {
+				this.prototype = true;
+			}
+			SuperType.prototype.getSuperValue = function() {
+				
+				//console.log(this.prototype);
+				return this.prototype;
+			};
+			//定义子类的构造函数(子类型函数)
+			function SubType() {
+				this.subprototype = false;
+				
+			}
+			
+			//继承
+			SubType.prototype = new SuperType();
+		
+			SubType.prototype.getSubValue = function() {
+				//console.log(this.subprototype);
+				return this.subprototype;
+			};
+		
+			var instance = new SubType();
+			
+			console.log(instance instanceof Object);//true;
+			console.log(instance instanceof SuperType);//true;
+			console.log(instance instanceof SubType);//true;
+			/**
+			 * 原型.isPrototypeOf(实例):判断实例是否是原型上的
+			 */
+			console.log(Object.prototype.isPrototypeOf(instance));//true
+			console.log(SuperType.prototype.isPrototypeOf(instance));//true
+			console.log(SubType.prototype.isPrototypeOf(instance));//true
+		</script>
+	</body>
+</html>

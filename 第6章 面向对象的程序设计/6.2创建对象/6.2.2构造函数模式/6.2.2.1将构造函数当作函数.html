@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.2.1将构造函数当作函数</title>
+	</head>
+	<body>
+		<script>
+			//"use strict";
+			console.log("--------------------------6.2.2.1将构造函数当作函数-------------------");
+			/**
+			 * 1.his永远指向当前正在被执行的函数或方法的owner
+			 */
+			function Person(name,age,job) {
+				this.name = name;
+				this.age = age;
+				this.job = job;
+				this.sayName = function() {
+					console.log(this.name);
+				}
+			}
+			function testWindow() {
+				console.log("所有函数window都可以调用");
+			}
+			//当作函数使用
+			var person1 = new Person("lvxin",18,"web");//在window下person1:{name:'lvxin',age:18,job:'web',sayName:f()};
+			person1.sayName();//lvxin
+			
+			//window.testWindow();
+			//作为普通函数调用,所有的函数都在windows底下
+			Person("xuyuqiu",19,"web");//严格模式下会报错,这里是空值，不知道为什么？
+			window.sayName;//xuyuqiu
+			console.log(window);
+			//window.testWindow();
+			
+			//在另一个对象的作用域中调用
+			var o = new Object();
+			Person.call(o,"duanyujie",20,"web");
+			o.sayName();//duanyujie
+			
+		</script>
+	</body>
+</html>

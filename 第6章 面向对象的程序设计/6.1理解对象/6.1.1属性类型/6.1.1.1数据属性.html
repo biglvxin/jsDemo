@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.1.1.属性类型-1.数据属性</title>
+	</head>
+	<body>
+		<script>
+			"use strict";
+			console.log("--------------------------6.1.1.属性类型-1.数据属性--------------------------");
+			/**
+			 * 1.getOwnPropertyDescriptor:  得到默认的属性是否可以读写的值
+			 * 2.defineProperty: 设置属性是否可以读写值
+			 */
+			var person = {
+				name:'lvxin',
+				cell:"1234"
+			};
+			//console.log(Object);
+			//console.log(Object.getOwnPropertyDescriptor(person));
+			//???为什么输入undefined
+			console.log(Object.getOwnPropertyDescriptor(person,"name"));
+			/**
+			 * 得到默认的值：
+ 			 * configurable: true 可以删除person，也可以修改configurable,enumerable,value,writable的值
+			 * enumerable: true 可以遍历person对象
+			 * value: "lvxin" 得到person的 name值
+			 * writable: true 可以修改person.name的值
+			 */
+	
+			//writable === true：可以修改对象的属性值
+			person.name = "lvxingxing";
+			console.log("writable === true" + "----" + person.name);
+			console.log(person);
+			//enumerable == true:对象可以使用for in 循环
+			for(var item in person) {
+				console.log("enumerable == true" + "----" + item + ":" + person[item]);
+			}
+			console.log(person);
+			delete person.name;
+			//configurable === true:可以删除属性
+			console.log("delete 后:" + person.name);
+			console.log(person);
+			
+			//设置属性是否可以读写值
+			var people = {
+				name:'lvxin',
+				age:18
+			}
+			console.log('--------------------------测试修改这些属性值，对象的值又带来什么可以操作改变的--------------------------');
+			console.log('--------------------------writable:flase不能修改属性值了--------------------------');
+			// Object.defineProperty不可以定义对象
+			 Object.defineProperty(people,"name",{
+			 	writable:false,
+			 	value:"lvxin",
+			 });
+			 console.log(Object.getOwnPropertyDescriptor(people,"name"));
+			 people.name = 'lvbigxinxin';
+			 console.log(Object.getOwnPropertyDescriptor(people,"name"));
+	
+			 
+			 console.log('--------------------------configurable:flase不能删除属性值了--------------------------')
+			 Object.defineProperty(people,"name",{
+			 	configurable:false,
+			 	value:"lvxin",
+			 });
+			 console.log(people.name);
+			 delete people.name;
+			 console.log(people.name);
+			 
+			 console.log('--------------------------configurable:flase不能再去修改configurable的值了--------------------------')
+			 //Object.defineProperty可以多个
+			 Object.defineProperty(people,"name",{
+			 	configurable:false,
+			 	value:"lvxin",
+			 });
+			 Object.defineProperty(people,"name",{
+			 	configurable:true,
+			 	value:"lvxin",
+			 });
+			 
+			 
+		</script>
+	</body>
+</html>
+

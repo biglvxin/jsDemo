@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.2.1闭包与变量</title>
+	</head>
+	<body>
+		<script>
+			console.log("---------------7.2.1闭包与变量--------------");
+			function createFunctions() {
+				var result = new Array();
+				for(var i = 0; i < 10; i++) {
+					result[i] = function() {
+						return i;
+					};
+				}
+				return result;
+			}
+			createFunctions();
+			console.log(createFunctions());//[function,function.....10个]
+			
+			function createFunctions2() {
+				var result = new Array();
+				for(var i = 0; i < 10; i++) {
+					result[i] = function(num) {
+						return function() {
+							return num;
+						}();
+					}(i);
+				}
+				return result;
+			}
+			createFunctions2();
+			console.log(createFunctions2());//[0,1,2,3,4,5,6,7,8,9]
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

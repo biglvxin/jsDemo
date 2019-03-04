@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.2.1HTML处理程序</title>
+	</head>
+	<body>
+		<input type="button" value="click me6" onclick="alert(value)"/>
+		<script>
+			//作用域，全局下有个标签，this就代表这个标签，那么可以省略this.value,直接写value就知道值了。
+			function dome1() {
+				with(document) {
+					with(this) {
+						console.log(this.value);
+					}
+				}
+			};
+			dome1();
+		
+		</script>
+	</body>
+	
+</html>

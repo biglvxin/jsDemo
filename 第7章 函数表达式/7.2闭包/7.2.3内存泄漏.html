@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.2.3内存泄漏</title>
+	</head>
+	<body>
+		<button id="someElement">点击按钮</button>
+		<script>
+			console.log("--------------7.2.3内存泄漏--------------");
+			//内存泄露：一个函数内部执行完之后，有的值例如html将无法释放，需要手动null，让内存释放
+			function assignHandler() {
+				var element = document.getElementById('someElement');
+				var id = element.id;
+				element.onclick = function() {
+					alert(id);
+				};
+				console.log(element);
+				element = null;//手动释放内存
+			}
+			
+			
+			assignHandler();
+			console.log(element);//出错
+			
+		</script>
+	</body>
+</html>

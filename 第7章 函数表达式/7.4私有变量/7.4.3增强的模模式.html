@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.4.3增强的模模式</title>
+	</head>
+	<body>
+		<script>
+			console.log("-------------------7.4.3增强的模模式----------------");
+			var singletton = function() {
+				var priviteVariable = 10;
+				function privateFunction() {
+					return false;
+				}
+				var myObject = function() {
+					
+				};
+				var object = new myObject();
+				object.publicPrototype = true;
+				object.publicMethod = function() {
+					priviteVariable++;
+					return privateFunction();
+				};
+				return object;
+			}();
+			console.log(singletton);
+			console.log(singletton.publicMethod());
+		</script>
+	</body>
+</html>

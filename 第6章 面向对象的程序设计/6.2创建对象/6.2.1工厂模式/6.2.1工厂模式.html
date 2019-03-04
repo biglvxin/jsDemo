@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.1工厂模式</title>
+	</head>
+	<body>
+		<script>
+			"use strict";
+			console.log("-------------------6.2.1工厂模式---------------------");
+			/**
+			 * 1.无法确定对象的类型，每次都是调用Object
+			 * 2.创建多个对象之间没有关联
+			 */
+			function createPerson(name,age,job) {
+				var o = new Object();
+				o.name = name;
+				o.age = age;
+				o.job = job;
+				o.sayName = function() {
+					console.log(this.name);
+				}
+				return o;
+			}
+			var person1 = createPerson('lvxin',18,'web');
+			console.log(person1);//Object{age:18,job:'web',name:'lvxin',sayName:f(),__proto__:Object}
+			console.log(person1.sayName);//错误：lvxin，正解：function
+			var person2 = createPerson('xuyuqiu',20,'web');
+			console.log(person2);//Object{age:20,job:'web',name:'xuyuqiu',sayName:f(),__proto__:Object}
+			console.log(person2.sayName);//错误：xuyuqiu，正解：function
+			
+			console.log(typeof person1);//Object
+			console.log(typeof person2);//Object
+			console.log(person1 === person2);//false
+			console.log(person1.sayName === person2.sayName)//false
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

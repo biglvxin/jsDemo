@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.2闭包</title>
+	</head>
+	<body>
+		<script>
+			console.log("--------------7.2闭包----------------");
+			/**
+			 * 作用域
+			 */
+			var a = 'lvxin';
+			function sayName() {
+				var a = "xuyuqiu";
+				console.log(a);//xuyuqiu
+			}
+			console.log(a);//lvxin
+			sayName();
+			
+			/**
+			 * 定义闭包函数，返回值是一个匿名函数
+			 */
+			function createComparisonFunction(propertyName) {
+				//返回匿名函数
+				return function(object1,object2) {
+					var value1 = object1[propertyName];
+					var value2 = object2[propertyName];
+					
+					if(value1 > value2) {
+						return 1;
+					}else if (value1 < value2) {
+						return -1;
+					}else {
+						return 0;
+					}
+				}
+			}
+			var a = createComparisonFunction("name");//a 是函数，是createComparisonFunction的调用返回的值
+			var result = a({name:'lvxin'},{name:'xuyuqiu'});
+			console.log(result);
+			a = null //释放内存
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

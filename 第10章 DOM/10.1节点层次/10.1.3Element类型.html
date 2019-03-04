@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.3Element类型</title>
+		<style>
+			.bgColorBlue {
+				width:100px;
+				height: 100px;
+				line-height: 100px;
+				text-align: center;
+				color:#fff;
+				background-color: blue;
+				cursor: pointer;
+			}
+			.bgColorRed {
+				width:100px;
+				height: 100px;
+				line-height: 100px;
+				text-align: center;
+				color:#fff;
+				background-color: red;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myDiv">得到tag名</div>
+		
+		<div id="testDiv" class='bgColorBlue' title="鼠标区域的内容" lang="en" dir="ltr" 
+		style="border:6px solid yellow;font-size: 22px;"onclick="clickDiv(this)"
+		data_special_attribute="hello!">test</div>
+		
+		<script>
+			/**
+			 * tagName
+			 * nodeName
+			 */
+		var myDiv = document.getElementById('myDiv');
+		console.log(myDiv.tagName);
+		console.log(myDiv.nodeName);
+		
+		//XML中为DIV(大写)，HTML中为div（小写），比较时最好统一
+		if(myDiv.tagName.toLowerCase() == 'div') {
+			console.log('标签名为：' + myDiv.tagName.toLowerCase());
+		}
+		
+		var testDiv = document.getElementById('testDiv');
+		console.log(testDiv.id);
+		console.log(testDiv.className);
+		console.log(testDiv.title);
+		console.log(testDiv.lang);
+		console.log(testDiv.dir);
+			
+		//可以改变这些值 
+		testDiv.className = 'bgColorRed';
+		console.log(testDiv.className);
+		/*getAttribute('属性名')
+		 * 属性取className,getAttribute取class
+		 * 可以取值自定义的属性
+		 * 
+		 */
+		function clickDiv(domdiv) {
+			console.log(domdiv);
+		}
+		console.log(testDiv.getAttribute('id'));
+		console.log(testDiv.getAttribute('class'));
+		console.log(testDiv.getAttribute('title'));
+		console.log(testDiv.getAttribute('lang'));
+		console.log(testDiv.getAttribute('dir'));
+		
+		console.log(testDiv.getAttribute('data_special_attribute'));
+		console.log(testDiv.data_special_attribute);
+		
+		
+		var testDivdiv = testDiv.style;
+		console.log(typeof testDivdiv);//对象 objectc
+		console.log(testDivdiv);
+		var testDivAttruibate = testDiv.getAttribute('style');
+		console.log(typeof testDivAttruibate);//css文本 string
+		console.log(testDivAttruibate);
+		
+		
+		var testDivdiv = testDiv.onclick;
+		console.log(typeof testDivdiv);//函数 function
+		console.log(testDivdiv);
+		var testDivAttruibate = testDiv.getAttribute('onclick');
+		console.log(typeof testDivAttruibate);//字符串 string
+		console.log(testDivAttruibate);
+		
+		/**
+		 * setAttribute('属性名'，'值')
+		 * HTML特性    自定义特性
+		 */
+		console.log(testDiv.setAttribute('class','bgColorBlue'));//undefined
+		testDiv.mycolor = 'yellow';
+		console.log(testDiv.getAttribute('mycolor'));//null
+			
+		/**
+		 * removeAttribute('属性名')
+		 */
+		testDiv.removeAttribute('data_special_attribute');//删除自定义的了
+		
+		
+		/**
+		 * attribute.getNamedItem(name)
+		 * attribute.removeNamedItem(name)
+		 * attribute.setNamedItem(node)nodeMap   名字+nodeValue
+		 * attribute.item(pos)
+		 */
+		var idname = testDiv.attributes.getNamedItem('id');
+		console.log(idname);
+		var idname = testDiv.attributes['id'];
+		console.log(idname);
+		
+		var typ=document.createAttribute("title");
+		typ.nodeValue="改变了";
+		testDiv.attributes.setNamedItem(typ);
+		
+		
+		outputAttributes(testDiv);
+		function outputAttributes(element) {
+			var pairs = new Array(),
+			attrName,
+			attrValue,
+			i,
+			len;
+			for(i = 0,len = element.attributes.length;i < len;i++) {
+				attrName = element.attributes[i].nodeName;
+				attrValue = element.attributes[i].nodeValue;
+				if(element.attributes[i].specified) {//可以指定特定的
+					pairs.push(attrName + "=\"" + attrValue + "\"");//低版本的会是所有的，
+				}
+				
+			}
+			console.log(pairs);
+		}
+		/**
+		 * 创建元素 document.createElement('标签名');
+		 * 完整的写法
+		 */
+		var div = document.createElement('div');
+		div.id = "myNewDiv";
+		div.className = "box";
+		document.body.appendChild(div);
+		
+		//在IE中可以使用
+		var div = document.createElement("<div id=\"myNewTwoDiv\" class=\"boxtwo\"></div>");
+		document.body.appendChild(div);
+		</script>
+	</body>
+</html>

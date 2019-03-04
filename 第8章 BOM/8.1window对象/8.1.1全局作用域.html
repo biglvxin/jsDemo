@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.1.1全局作用域</title>
+	</head>
+	<body>
+		<script>
+			console.log('----------------8.1.1全局作用域-----------------');
+				var age = 18;
+				function sayAge() {
+					console.log(this.age);//this 指window对象   18
+				}
+				console.log(window.age);//18
+				console.log(sayAge());//18
+				console.log(window.sayAge());//18
+		</script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.1.6间歇调用和超时调用</title>
+	</head>
+	<body>
+		<script>
+			var num = 0;
+			var max = 10;
+			var intervalId = null;
+			function incrementNumber() {
+				num++;
+				console.log(num);
+				if(num > max) {
+					clearInterval(intervalId);
+					console.log('结束');
+				}
+			}
+			var intervalId = setInterval(incrementNumber,500);
+			
+			
+			
+		</script>
+	</body>
+</html>

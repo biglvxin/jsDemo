@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.5寄生式继承</title>
+	</head>
+	<body>
+		<script>
+			console.log("-------------6.3.5寄生式继承---------------");
+			function object(o) {
+				function F() {}
+				F.prototype = o;
+				return new F();
+			}
+			
+			function createAnother(original) {
+				var clone = object(original);
+				clone.sayHi = function() {
+					return 'hi';
+				}
+				return clone;
+			}
+			var person = {
+				name:'lvxin',
+				friends:['duanyujie','xuyuqiu']
+			};
+			var anotherPerson = createAnother(person);
+			console.log(anotherPerson.sayHi());//hi
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.1.4原型链的问题</title>
+	</head>
+	<body>
+		<script>
+			console.log("----------------------------6.3.1.4原型链的问题------------------------------");
+			/**
+			 * 1.所有方法和属性都全部共享，一改全改值
+			 */
+			function SuperType() {
+				this.color = ['blue','yellow','red'];
+			}
+			function SubType() {
+				
+			}
+			SubType.prototype = new SuperType();
+			var instance1 = new SubType();
+			var instance2 = new SubType();
+			console.log(instance1.color);//['blue','yellow','red','white']
+			console.log(instance2.color);//['blue','yellow','red','white']
+			instance1.color.push('white');
+			console.log(instance1.color);//['blue','yellow','red','white']
+			console.log(instance2.color);//['blue','yellow','red','white']
+			
+			
+			
+		</script>
+	</body>
+</html>

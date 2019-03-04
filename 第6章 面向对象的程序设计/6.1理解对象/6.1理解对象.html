@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.1.理解对象</title>
+	</head>
+	<body>
+		<script>
+			"use strict";
+			console.log("--------------------------6.1.理解对象--------------------------")
+			var person1 = new Object();
+			person1.name = 'lvxing1';
+			person1.age = 23;
+			person1.job = 'web';
+			person1.sayName = function() {
+				console.log(this);
+				alert(this.name);
+			} 
+			console.log(person1.sayName());
+			var person2 = {
+				name : 'lvxing2',
+				age: 23,
+				job: 'web',
+				sayName:function() {
+					console.log(this);
+					alert(this.name);
+				}
+			}
+			console.log(person2.sayName());
+		</script>
+	</body>
+</html>

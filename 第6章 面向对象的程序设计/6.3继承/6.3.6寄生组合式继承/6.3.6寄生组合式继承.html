@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.6寄生组合式继承</title>
+	</head>
+	<body>
+		<script>
+			console.log("-----------------6.3.6寄生组合式继承------------------");
+			
+			function object(o) {
+				function F() {}
+				F.prototype = o;
+				return new F();
+			}
+			
+			function inheritPrototype(subType,superType) {
+				var prototype = object(subType.prototype);
+				prototype.constructor = subType;
+				subType.prototype = prototype;
+			}
+			
+			function SuperType(name) {
+				this.colors = ['red','blue','green'];
+				this.name = name;
+			}
+			
+			SuperType.prototype.sayName = function() {
+				return this.name;
+			};
+			
+			
+			function SubType(name,age) {
+				SuperType.call(this,name);
+				this.age = age;
+			}
+			
+			inheritPrototype(SubType,SuperType);
+			
+			SubType.prototype.sayAge = function() {
+				return this.age;
+			}
+			
+		</script>
+	</body>
+</html>

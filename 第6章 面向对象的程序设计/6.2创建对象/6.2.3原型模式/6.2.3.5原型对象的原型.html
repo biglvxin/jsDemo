@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3.5原型对象的原型</title>
+	</head>
+	<body>
+		<script>
+			console.log("---------------------6.2.3.5原型对象的原型-----------------------");
+			/**
+			 * 1.所有原生引用类型（object，Array,String）为原型对象的原型
+			 * 
+			 */
+			console.log(typeof Array.prototype.sort);//function
+			console.log(typeof String.prototype.substring);//function
+			
+			//判断字符是否存在
+			String.prototype.startsWith = function (text) {
+				console.log(this.indexOf(text));//0
+				return this.indexOf(text) == 0;
+			};
+			
+			var msg = "Hello world!";
+			console.log(msg.startsWith('Hello'));//true
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
