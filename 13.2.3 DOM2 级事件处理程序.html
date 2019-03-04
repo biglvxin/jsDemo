@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.2.3 DOM2 级事件处理程序</title>
+	</head>
+	<body>
+		<input type="button" id="myBtn" value="DOM2事件处理程序" />
+		<script>
+			/**
+			 * addEventListener("事件名"，"处理函数"，false|true);
+			 * false:冒泡阶段调用处理程序
+			 * true：捕获阶段调用处理程序
+			 * 可以添加多个事件处理程序，点击事件同时响应，只要点击一次，就连续输出
+			 */
+			let btn = document.getElementById("myBtn");
+			btn.addEventListener('click', function() {
+				alert("第一次click！");
+			}, false);
+			btn.addEventListener('click', function() {
+				alert("第二次click！");
+			}, false);
+			
+		</script>
+	</body>
+</html>
