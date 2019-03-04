@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.2.1HTML处理程序</title>
+	</head>
+	<body>
+		<!--必须要有name值，才可以找到form-->
+		<form method="post" name="form">
+			<input type="text" name="username" value="" />
+			<input type="button" value="Echo Username" onclick="alert(username.value)"  />
+		</form>
+		<script>
+			/**
+			 * function () {}  匿名函数
+			 */
+			function formTest() {
+				with(document) {
+					with(this.form) {
+						with(this);
+						console.log(this);
+					}
+				}
+			}
+			formTest();
+		</script>
+	</body>
+	
+</html>

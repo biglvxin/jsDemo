@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.2.2DOM0级事件处理程序</title>
+	</head>
+	<body>
+		<input type="button" id="myBtn" value="DOM0事件处理程序" />
+		<script>
+			let btn = document.getElementById("myBtn");
+			btn.onclick = function() {
+				//this 为当前的元素，即btn
+				alert('clicked');
+				console.log(this.id);
+			}
+		</script>
+	</body>
+</html>
