@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Node 类型</title>
+	</head>
+	<body>
+		<div class="node-wrap">
+			父节点
+			<div class="first-node">1子节点</div>
+			<div class="second-node">2子节点</div>
+			<div class="third-node">3子节点</div>
+		</div>
+		
+		
+		<div class="test"></div>
+		<div class="test1">有内容</div>
+	</body>
+	<script>
+		/**
+		 * 常用的节点类型：(节点是由：元素，属性，文本组成)
+		 * 1.元素节点：<div><body>即标签
+		 * 2.属性节点：class href id 
+		 * 3.文本节点：任意的文字、空格、换行、空白行都算是文本节点
+		 * 8.注释节点：
+		 */
+		var test = document.querySelector('.test');
+		console.log(test.nodeType);
+		
+		var test1 = document.querySelector('.test1');
+		console.log(test1.nodeType);
+		/**
+		 * 元素节点 nodeType = 1
+		 * nodeName
+		 * nodeValue
+		 */
+		var parentNodeTest = document.querySelector('.node-wrap');
+		console.log(parentNodeTest.nodeType);//1   
+		console.log(parentNodeTest.nodeName);//DIV
+		console.log(parentNodeTest.nodeValue);//null
+		console.log(parentNodeTest.getAttribute('class'));
+		
+		/**
+		 * NodeList 对象，不是Array实例，DOM结构动态的查询结果(childNodes)
+		 * childNodes.item(i)
+		 * childNodes[i]
+		 */
+		
+		console.log(parentNodeTest.childNodes);
+		console.log("共多少个子节点：" + parentNodeTest.childNodes.length);
+		for(let i = 0; i < parentNodeTest.childNodes.length; i++) {
+			console.log(parentNodeTest.childNodes[i]);
+			//console.log(parentNodeTest.childNodes.item(i));
+		}
+		
+		/**
+		 * parentNode
+		 * firstChild
+		 * lastChild
+		 * previousSibling
+		 * nextSibling
+		 * hasChildNodes(),返回true
+		 * ownerDocument:每个节点都有这个属性，指向文档节点，只有一个文档节点(docment)
+		 */
+		/**
+		 * appendChild(添加的节点)，添加已存在的节点，就是给节点换位置到末尾
+		 * insertBefore(添加的节点，参照的节点|null--在末尾加入节点)（这两个节点是相邻的，添加的节点在参照的节点之前)
+		 * replaceChild(新的添加的节点，要替换的节点)
+		 * removeChild(已存的节点)
+		 * cloneNode(true|false)
+		 */
+		//添加已存在的节点
+		var firstNodeTest = document.querySelector('.first-node');
+		var thirdNodeTest = document.querySelector('.third-node');
+		parentNodeTest.appendChild(firstNodeTest);//第一个节点就到最后一个节点的位置了
+		parentNodeTest.insertBefore(firstNodeTest,thirdNodeTest);//1放在3的前面
+		
+		//深克隆
+		var deepList = parentNodeTest.cloneNode(true);
+		console.log(deepList.childNodes.length);//7
+		//浅克隆
+		var shallowList = parentNodeTest.cloneNode(false);
+		console.log(shallowList.childNodes.length);//0
+		
+		
+		
+		
+	</script>
+</html>

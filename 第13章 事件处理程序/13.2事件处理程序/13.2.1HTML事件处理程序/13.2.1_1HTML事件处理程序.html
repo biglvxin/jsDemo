@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.2.1HTML事件处理程序</title>
+	</head>
+	<body>
+		
+		
+		
+		<input type="button" value="click me1" onclick="alert('clicked')"/>
+		<input type="button" value="click me2-1" onclick="alert("clicked")"/><!--无效，只能有一个双引号-->
+		<input type="button" value="click me2-2" onclick="alert(&quot;clicked&quot;)"/>
+		
+		<input type="button" value="click me3" onclick="showMessage()"/>
+		
+		<script>
+			function showMessage() {
+				alert("Hello world!");
+			}
+		</script>
+		
+		
+		<input type="button" value="click me4" onclick="alert(event.type)"/>
+		<input type="button" value="click me5" onclick="alert(this.value)"/>
+		<input type="button" value="click me6" onclick="alert(value)"/>
+		<script>
+			//作用域，全局下有个标签，this就代表这个标签，那么可以省略this.value,直接写value就知道值了。
+			function dome1() {
+				with(document) {
+					with(this) {
+						console.log(value);
+					}
+				}
+			};
+			dome1();
+		
+		</script>
+	
+	</body>
+</html>

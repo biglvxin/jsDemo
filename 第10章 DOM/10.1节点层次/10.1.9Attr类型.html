@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.9Attr类型</title>
+	</head>
+	<body>
+		<div id="myDiv"></div>
+		<script>
+			var attr = document.createAttribute('align');
+			attr.value = "left";
+			var div = document.getElementById('myDiv');
+			div.setAttributeNode(attr);
+			console.log(div.attributes['align'].value);//left
+			console.log(div.getAttributeNode('align').value);//left
+			console.log(div.getAttribute('align'));//left
+			
+		</script>
+	</body>
+</html>

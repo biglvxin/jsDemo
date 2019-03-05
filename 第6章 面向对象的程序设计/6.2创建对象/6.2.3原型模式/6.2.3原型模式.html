@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3原型模式</title>
+	</head>
+	<body>
+		<script>
+			console.log("----------------------6.2.3原型模式---------------------");
+			/*
+			 * 1.每个函数（构造函数）都有一个prototype（原型）属性
+			 * 2.prototype（原型）属性是一个指针，指向一个对象
+			 * 3.prototype（原型）属性的这个对象包括所有特定类型（自己定义的构造函数）的所有实例（new自己定定义的函数)的属性和方法。
+			 */
+			//空的构造函数
+			function Person () {
+				
+			}
+			//所有Person的实例共享这些属性和方法
+			Person.prototype.age = 18;
+			Person.prototype.name = "lvxin";
+			Person.prototype.jos = "web";
+			Person.prototype.sayName = function() {
+				console.log(this.name);
+			}
+			var person1 = new Person();
+			var person2 = new Person();
+			console.log(person1.sayName());//lvxin
+			console.log(person2.sayName());//lvxin
+			console.log(person1.sayName() == person2.sayName());
+		</script>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.3模仿块级作用域</title>
+	</head>
+	<body>
+		 <script>
+		 	console.log("---------------------7.3模仿块级作用域-----------------------");
+		 	//没有块级作用域的概念
+		 	if(true) {
+		 		var color = 'blue';//全局变量
+		 	}
+		 	console.log(color);//blue
+		 	function outputNumbers(count) {
+		 		for(var i = 0;i < count;i++) {
+		 			console.log(i);//1,2,3,4
+		 		}
+		 		console.log(i);//计数  4
+		 	}
+		 	outputNumbers(4);
+		 	
+		 	
+		 	function outputNumbers(count) {
+		 		for(var i = 0;i < count;i++) {
+		 			console.log(i);//1,2,3,4
+		 		}
+		 		console.log(i);//计数  4
+		 	}
+		 	outputNumbers(4);
+		 	var i;
+		 	console.log(i);//undefiend
+		 	
+		 	
+		 	var a = 0;
+		 	console.log(a);//0
+		 
+		 	//块级作用域
+		 	(function() {
+		 		var a = 1;
+		 		console.log(a);//1
+		 	})();
+		 	(function() {
+		 		var a = 2;
+		 		console.log(a);//2
+		 	})();
+		 		
+		 	console.log(a);//0
+		 	
+		 	
+		 	
+		 	//只有表达式函数，可以在后面加括号调用
+		 	
+		 	function outputNumbers(count) {
+		 		(function() {
+		 			for(var i = 0;i<count;i++) {
+		 				console.log(i);
+		 			}
+		 		})();
+		 		console.log(i);//不是计数作用了，取不到内部的i最后的值了，结果为undefined
+		 	}
+		 	
+		 	
+		 	outputNumbers(4);
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 </script>
+	</body>
+</html>

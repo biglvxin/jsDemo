@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.5Comment类型</title>
+	</head>
+	<body>
+		<div class="comment"><!--A comment--></div>
+		<script>
+			//得到注释的内容
+			var div = document.querySelector('.comment');
+			var comment = div.firstChild;
+			console.log(comment.data);//A comment
+			console.log(comment.nodeValue);//A comment
+			//创建注释
+			var divCreateComment = document.createComment('B comment');
+			document.body.appendChild(divCreateComment);
+			
+			
+		</script>
+	</body>
+</html>

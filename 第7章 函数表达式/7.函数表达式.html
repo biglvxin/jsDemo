@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.函数表达式</title>
+	</head>
+	<body>
+		<script>
+			console.log("----------------7.函数表达式------------------------");
+			//变量提升
+			sayHi();
+			function sayHi() {
+				console.log("Hi!");
+			}
+			//sayHi2();出错
+			var sayHi2 = function() {
+				console.log('Hi!');
+			};
+			sayHi2();
+			
+			
+			var condition = true;
+			//函数只有定义不输出 
+			//没有意义
+			if(condition) {
+				function sayHi() {
+					console.log("Hi!");
+				}
+			}else {
+				function sayHi() {
+					console.log("Yo!");
+				}
+			}
+			
+			//严格模式下
+			if(condition) {
+				var sayHi = function() {
+					console.log("Hi!");
+				}
+			}else {
+				var sayHi = function() {
+					console.log("Yo!");
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.4.2模块模式.html</title>
+	</head>
+	<body>
+		<script>
+			console.log("-------------------7.4.2模块模式.html--------------");
+			//单例
+//			var singleton = {
+//				name:value,
+//				method:function() {
+//					
+//				}
+//			};
+			var singleton = function() {
+				var privateVariable = 10;
+				function privateFunction() {
+					return false;
+				}
+				return {
+					publicPrototype:true,
+					publicMethod:function() {
+						privateVariable++;
+						return privateFunction();
+					}
+				};
+			}
+			console.log(singleton());
+			var testObject = singleton().publicMethod();
+			console.log(testObject);//false;
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

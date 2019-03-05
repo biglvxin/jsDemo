@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.6CDATASection类型</title>
+	</head>
+	<body>
+		<div id="myDiv"><![CDATA[This is some content.]]</div>
+		<script>
+			/**
+			 * 创建6CDATASection类型，createCDataSetion
+			 */
+			var div = document.getElementById('myDiv');
+			var value = div.firstChild.nodeType;
+			console.log(value);//nodeType:8??
+		</script>
+	</body>
+</html>

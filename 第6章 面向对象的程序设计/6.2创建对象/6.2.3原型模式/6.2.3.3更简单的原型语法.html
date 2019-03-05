@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3.3更简单的原型语法</title>
+	</head>
+	<body>
+		<script>
+			console.log("---------------------------6.2.3.3更简单的原型语法-----------------------");
+			/**
+			 * `1.创建一个函数同时会创建一个prototype对象
+			 * 2.赋值整个对象是重构一个对象，一个一个赋值是修改本来的值
+			 */
+			function Person() {
+				
+			}
+			Person.prototype = {
+				name:'lvxin',
+				age:18,
+				job:"web",
+				sayName:function() {
+					console.log(this.name);
+				}
+			}
+			var person1 = new Person();
+			console.log(person1 instanceof Person);//true;
+			console.log(person1 instanceof Object);//true;
+			console.log(person1.constructor instanceof Person);//false;
+			console.log(person1.constructor instanceof Object);//true;
+			
+			
+			console.log(Object.getOwnPropertyDescriptor(Person.prototype,"constructor"));//undefined
+			
+			/**
+			 * 1.修改实例的constructor指向有两种方法
+			 * 		1-1：直接写个属性constructor:Person
+			 * 		1-2：Object.defineProperty(对象，属性名，修改的列值)
+			 */
+			function Person2() {
+				
+			}
+			Person2.prototype = {
+				constructor:Person2,
+				name:'lvxin',
+				age:18,
+				job:"web",
+				sayName:function() {
+					console.log(this.name);
+				}
+			}
+			var person2 = new Person2();
+			console.log(person2 instanceof Person2);//true;
+			console.log(person2 instanceof Object);//true;
+			console.log(person2.constructor instanceof Person2);//false
+			console.log(person2.constructor instanceof Object);//true;
+			
+			
+			console.log(Object.getOwnPropertyDescriptor(Person2.prototype,"constructor"));//enumerable:true
+			Object.defineProperty(Person2.prototype,"constructor",{
+				enumerable:false,
+				value:Person2
+			});
+			console.log(person2.constructor instanceof Person2);//false;
+			console.log(Object.getOwnPropertyDescriptor(Person2.prototype,"constructor"));//enumerable:false
+			console.log(person2.constructor instanceof Person2);//f alse;
+		</script>
+	</body>
+</html>

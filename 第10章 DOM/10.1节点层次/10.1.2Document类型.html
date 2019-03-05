@@ -1,0 +1,119 @@
+<!--注释会不会是第一个节点-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.2Document类型</title>
+	</head>
+	<body>
+		<div id="myDiv">Some Text</div>
+		<div id="myDiv">Some Text2</div>
+		<div id="myDiv">Some Text2</div>
+		
+	
+		<input type="text" name="myElement" value="text field">
+		<div id="myElement">A div</div>
+		
+		
+		<div id="imgs">
+			<img src="3.jpg" name="one">
+			<img src="3.jpg" name="two">
+			<img src="3.jpg" name="three">
+			<img src="3.jpg" name="four">
+		</div>
+		
+		<ul>
+			<li>
+				<label>red</label>
+				<input type="radio" name="color">
+			</li>
+			<li>
+				<label>bule</label>
+				<input type="radio" name="color">
+			</li>
+			<li>
+				<label>yellow</label>
+				<input type="radio" name="color">
+			</li>
+		</ul>
+		<p>The current date and time is:
+			<script>
+				/**
+				 * write()
+				 * writeln()
+				 * open()
+				 * close()
+			 	*/
+				document.write("<strong>" + (new Date()).toString() + "</strong>");
+			</script>
+		</p>
+		<script>
+			/**
+			 * 整个文档只包含一个元素子元素html
+			 * 
+			 */
+			console.log(document.documentElement);//整个html所有标签，所有点的
+			console.log(document.childNodes[0]);//<!DOCTYPE html>根据浏览器值会不一样
+			console.log(document.firstChild);//<!DOCTYPE html>
+			console.log(document.body);//<bod>所有的标签和所有的节点
+			console.log(document.doctype);//<!DOCTYPE html>
+			
+			
+				var  originalTitle = document.title;
+			console.log(originalTitle);
+			
+			document.title = "改一个标题";
+			console.log(document.title);
+			
+			var url = document.URL;
+			console.log(url);
+			
+			var domain = document.domain;
+			console.log(domain);
+			
+			var referrer = document.referrer;
+			console.log(referrer);
+			
+			
+			/**
+			 * getElementById() 得到一个，有多个取第一个
+			 * getElementsByTagName()多个
+			 * getElementsByTagName下才可以用namedItem()多个下的一个
+			 * getElementsByTagName(*)多个
+			 * getElementsByName();多个
+			 */
+			var div = document.getElementById('myDiv');
+			console.log(div);//多个取第一个
+			//name和id最好不要一样，老的浏览器会取出name的这个标签，id要唯一
+			var inputdiv = document.getElementById('myElement');
+			console.log(inputdiv);
+			
+			
+			var imgs = document.getElementsByTagName('img');
+			console.log(imgs);
+			console.log(imgs.length);
+			console.log(imgs[0].src);
+			console.log(imgs.item(0).src);
+			
+			var myImg = imgs.namedItem('one');
+			console.log(myImg);
+			
+			var myImgtwo = imgs['two'];
+			console.log(myImgtwo);
+			
+			
+			var allElements = document.getElementsByTagName('*');
+			console.log(allElements);
+			
+			var byName = document.getElementsByName('color');
+			console.log(byName);
+			
+			var nameDitem = document.getElementsByTagName('input');
+			var firstColor = nameDitem.namedItem('color');//只要第一个
+			console.log(firstColor);
+			
+			
+		</script>
+	</body>
+</html>
+<!--不同浏览器会不会识别这个注释节点-->

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.2.2关于this对象</title>
+	</head>
+	<body>
+		<script>
+			console.log("---------------7.2.2关于this对象------------");
+			/**
+			 * this   
+			 *   1.指向windows对象
+			 * 	 2.当前对象
+			 * 	 3.当前函数
+			 */
+			var name = "The Window";
+			
+			var object = {
+				name:'My Object',
+				getNameFunc:function() {
+					return function() {
+						return this.name;//this指当前的匿名函数,如果没有，一层层往上找
+					}
+				}
+			};
+			
+			var result = object.getNameFunc()();
+			console.log(result);//The Window
+			
+			
+			
+			/**
+			 * 用this访问永远是访问当前的，外部的无法知道,可以改变this的值
+			 * 如果想要访问外部的，面不是当前的呢
+			 */
+			
+			var name = "The Window";
+			
+			var object = {
+				name:'My Object',
+				getNameFunc:function() {
+					var that = this;//可以在这个函数里面取this.name;
+					return function() {
+						return that.name;
+					}
+				}
+			}
+			
+			var result = object.getNameFunc()();
+			console.log(result);//'My Object'
+			
+			
+			
+			var name = "The Window";
+			var object = {
+				name:'My Object',
+				getName:function() {
+					return this.name;//My Object
+				}
+			}
+			
+			var result = object.getName();
+			console.log(result);//'My Object'
+			
+			var result = (object.getName)();
+			console.log(result);//'My Object'
+			
+			
+			var result = (object.getName = object.getName)();
+			console.log(result);//'The Window'
+			
+		</script>
+	</body>
+</html>

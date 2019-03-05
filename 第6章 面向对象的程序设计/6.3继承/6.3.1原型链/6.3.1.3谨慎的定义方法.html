@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.3.1.3谨慎的定义方法</title>
+	</head>
+	<body>
+		<script>
+			console.log("-------------------6.3.1.3谨慎的定义方法-------------------");
+			/**
+			 * 1.先继承父的属性和方法，再去写子类的属性和方法,可以重写父类的方法和属性。
+			 * 2.通过原型链继承，不能用字变量的方式创建原型。
+			 */
+			function SuperType() {
+				this.prototype = true;
+			};
+			SuperType.prototype.getSuperValue = function() {
+				return this.prototype;
+			};
+			function SubType() {
+				this.subprototype = false;
+			}
+			//继承
+			SubType.prototype = new SuperType();
+			//重写父的方法
+			SubType.prototype.getSuperValue = function() {
+				return false;
+			}
+			//增加新方法
+			SubType.prototype.getSubValue = function() {
+				return this.subprototype;
+			}
+			var instance = new SubType();
+			console.log(instance.getSuperValue());//false;先找子的同名函数
+			
+			/**
+			 * 1.先继承父的属性和方法，再去写子类的属性和方法,可以重写父类的方法和属性。
+			 * 2.通过原型链继承，不能用字变量的方式创建原型。
+			 */
+			
+			function SuperType1() {
+				this.prototype = true;
+			};
+			SuperType1.prototype.getSuperValue1 = function() {
+				return this.prototype;
+			};
+			function SubType1() {
+				this.subprototype = false;
+			}
+			//继承
+			SubType1.prototype = new SuperType1();
+			//用字变量的方式
+			SubType1.prototype = {
+				getSubValue:function() {
+					return this.subprototype;
+				},
+			};
+			var instance = new SubType1();
+			console.log(instance.getSuperValue1());//is no has function 字变量会使继承无效，子中没有父的方法。
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

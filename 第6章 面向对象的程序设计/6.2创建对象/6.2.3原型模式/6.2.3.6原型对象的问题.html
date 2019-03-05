@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3.6原型对象的问题</title>
+	</head>
+	<body>
+		<script>
+			console.log("-----------------------6.2.3.6原型对象的问题---------------------------");
+			/**
+			 * 1.实例取得相同的属性值
+			 * 2.实例1修改了值，实例2值也会变
+			 */
+			
+			function Person () {
+				
+			}
+			Person.prototype = {
+				constructor:Person,
+				name:'lvxin',
+				age:18,
+				job:'web',
+				friends:['xuyuqiu','duanyujie'],
+				sayName:function() {
+					console.log(this.name);
+				}
+			};
+			var person1 = new Person();
+			var person2 = new Person();
+			
+			
+			person1.friends.push('lizhiying');//
+			console.log(person1.friends);//['xuyuqiu','duanyujie','lizhiying']
+			console.log(person2.friends);//['xuyuqiu','duanyujie','lizhiying']
+			
+			console.log(person1.friends === person2.friends);//true
+			
+			
+			
+		</script>
+	</body>
+</html>

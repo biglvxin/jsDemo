@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.2构造函数模式</title>
+	</head>
+	<body>
+		<script>
+			'use strict';
+			console.log("-------------------------6.2.2构造函数模式---------------------------");
+			/**
+			 * 1.1创建一个新的实例，必须使用new
+			 * 1.2Person是一个特殊函数，为构造函数
+			 */
+			function Person(name,age,job) {
+				this.name = name;
+				this.age = age;
+				this.job = job;
+				this.sayName = function() {
+					console.log(this.name);
+				}
+			}
+			var person1 = new Person('lvxin',18,'web');
+			var person2 = new Person('xuyuqiu',20,'web');
+			
+			console.log(person1);//Person{age:18,job:'web',name:'lvxin',sayName:f(),__proto__:Object}
+			console.log(person2);//Person{age:20,job:'web',name:'xuyuqiu',sayName:f(),__proto__:Object}
+			console.log(typeof person1);//错误：Person，正解：Object
+			console.log(typeof person2);//错误：Person，正解：Object
+			console.log(person1 === person2);//false
+			console.log(person1.sayName === person2.sayName)//false
+			
+			/**
+			 * 2.1两个对象都有个构造函数，该属性指向Person
+			 * 2.2person1和person2时Person的实例
+			 */
+			console.log(person1.constructor == Person);//true
+			console.log(person2.constructor == Person);//true
+			/**
+			 * 3.1创建所有的对象都是Object实例,因为对象均继承Object
+			 */
+			console.log(person1 instanceof Person);//true
+			console.log(person1 instanceof Object);//true
+			console.log(person2 instanceof Person);//true
+			console.log(person2 instanceof Object);//true
+			/**
+			 * 4.1多个实例重复创建方法，无法共享
+			 * 4.2多个实例都有sayName方法，但均不是同一个Function的实例
+			 */
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

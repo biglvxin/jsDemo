@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.4Text类型</title>
+	</head>
+	<body>
+		<div class="parent">
+			<div class="node1">
+				node1
+				node11
+			</div>
+			<div class="node2">node2</div>
+			<div class="node3">node3</div>
+		</div>
+		<script>
+			var div = document.querySelector('.parent');
+			var firstdiv = div.firstChild;
+			console.log(firstdiv);
+			firstdiv.nodeValue = "Some <strong>other</strong> message";
+			
+			/**
+			 * 创建文本节点document.createTextNode('字符内容')
+			 * 分割文本节点splitText（位置）;分成两个文本节点
+			 */
+			var div = document.createElement('div');
+			div.className = 'message';
+			var textDiv = document.createTextNode('Hello js!');
+			div.appendChild(textDiv);
+			//创建多个,此时 存在两个节点，可能显示在网页上的是在一行上，但是是两个文本节点
+			var textDivAnthor = document.createTextNode('anthor hello js!');
+			div.appendChild(textDivAnthor);
+			document.body.appendChild(div);
+			//合并相邻的文本节点normalize()
+			console.log(div.childNodes.length);//2
+			console.log(div.firstChild.nodeValue);//Hello js
+			div.normalize();
+			console.log(div.childNodes.length);//1
+			console.log(div.firstChild.nodeValue);//Hello js!anthor hello js!
+			
+			//splitText
+			var newTextDiv = div.firstChild.splitText(5);
+			console.log(div.firstChild.nodeValue);//Hello
+			console.log(newTextDiv.nodeValue);//" js!anthor hello js!"
+			console.log(div.childNodes.length);//2
+			
+		</script>
+	</body>
+</html>

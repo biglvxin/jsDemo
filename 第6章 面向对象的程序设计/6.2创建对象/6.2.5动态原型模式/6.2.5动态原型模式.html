@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.5动态原型模式</title>
+	</head>
+	<body>
+		<script>
+			console.log("--------------------6.2.5动态原型模式-------------------------");
+			/**
+			 * 判断是否初始化构造函数
+			 */
+			function Person(name,age,job) {
+				this.name = name;
+				this.age = age;
+				this.job = job;
+				//初次调用构造函数时
+				if(typeof this.sayName != 'function') {
+					//注意，不能使用字变量方式重写
+					Person.prototype.sayName = function() {
+						console.log(this.name);
+					}
+				}
+			}
+			var friend = new Person('xuyuqiu',18,'web');
+			friend.sayName();
+			
+		</script>
+	</body>
+</html>

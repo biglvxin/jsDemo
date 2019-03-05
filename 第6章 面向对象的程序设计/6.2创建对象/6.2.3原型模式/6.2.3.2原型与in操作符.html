@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6.2.3.2原型与in操作符</title>
+	</head>
+	<body>
+		<script>
+			console.log("-----------------------6.2.3.2原型与in操作符.html------------------");
+			/**
+			 * 1.in用法：判断属性是否存在
+			 * 2.in 无论实例自己的属性还是实例用原型的属性，都返回true
+			 * 3.通过 in返回true和hasOwnPrototype()返回false，判断是原型上的属性
+			 * 4.hasPrototypeProperty(实例，属性),返回true/false,判断是否是原型上的属性。
+			 */
+			 function Person() {
+			 	
+			 }
+			 Person.prototype.name = 'lvxin';
+			 Person.prototype.age = 18;
+			 Person.prototype.job = 'web';
+			 Person.prototype.sayName = function() {
+			 	console.log(this.name);
+			 }
+			var person1 = new Person();
+			var person2 = new Person();
+			
+			person1.name = "xuyuqiu";
+			console.log('name' in person1);//true;
+			console.log('name' in person2);//true;
+			
+			console.log(person2.hasOwnProperty(name));//false 判断person2.name 来自原型
+			
+			//console.log(hasPrototypeProperty(person1,'name'));//false;
+			//console.log(hasPrototypeProperty(person2,'name'));//true;
+			
+			/**
+			 * 1.Object.keys(对象)，返回数组，找到对象的可以枚举的属性名
+			 * 2.Object.getOwnPropertyNames(对象)，返回数组，找到对象的可以枚举或者不可枚举的属性名
+			 */
+			var keysArr = Object.keys(Person.prototype);//[name,age,job,sayName];
+			console.log(keysArr);
+			
+			
+			person1.name = "duanyujie";
+			person1.age = 20;
+			//实例没有的自生属性
+			var person1KeysArr = Object.keys(person1);//[name,age]
+			console.log(person1KeysArr);
+			
+			//constructor 不可枚举
+			var keys = Object.getOwnPropertyNames(Person.prototype);//[constructor,name,age,job,sayName];
+			console.log(keys);
+		</script>
+		
+		
+	</body>
+</html>

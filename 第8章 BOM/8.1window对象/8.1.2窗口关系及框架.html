@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.1.2窗口关系及框架</title>
+	</head>
+	<!--
+    	frameset 不可以在body中使用框架，frame：目标框架
+    	rows:行高
+    	cols:列宽
+    	src:路径
+    	一个窗口一个windows对象
+    -->
+		<frameset rows="350,*">
+			<frame src="frame1.html" name="topFrame">
+				<frameset cols="50%,50%">
+					<frame src="frame2.html" name="leftFrame">
+					<frame src="frame3.html" name="rightFrame">
+					
+				</frameset>
+		</frameset>
+	
+
+		
+</html>

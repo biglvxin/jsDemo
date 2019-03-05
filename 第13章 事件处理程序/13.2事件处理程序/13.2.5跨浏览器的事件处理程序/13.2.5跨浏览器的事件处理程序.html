@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.2.5跨浏览器的事件处理程序</title>
+	</head>
+	<body>
+		<input type="button" id="myBtn" value="跨浏览器的事件处理程序"  />
+		<script>
+			let EventUtil = {
+				addHandler: function(element, type, handler) {
+					if(element.addEventListener) {
+						element.addEventListener(type, handler, false);//DOM2 事件处理程序
+					} else if (element.attachEvent) {
+						element.attachEvent('on' + type, handler);//IE 事件处理程序
+					} else {
+						element["on" + type] = handler; //DOM0 事件处理程序
+					}
+				},
+				removeHandler: function(element, type, handler) {
+					if(element.removeEventListener) {
+						element.removeEventListener(type, handler, false);//DOM2 事件处理程序
+					} else if(element.detachEvent) {
+						element.detachEvent('on' + type, handler);//IE 事件处理程序
+					} else {
+						element["on" + type] = null;//DOM0 事件处理程序
+					}
+				},
+			}
+			let btn = document.getElementById("myBtn");
+			let handler = function() {
+				alert("Clicked!");
+			}
+			EventUtil.addHandler(btn, 'click', handler);
+			//EventUtil.removeHandler(btn, 'click', handler);
+		</script>
+	</body>
+</html>

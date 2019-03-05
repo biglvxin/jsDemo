@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1.8DocumentFragment类型</title>
+	</head>
+	<body>
+		<ul id="myList"></ul>
+		<script>
+			var fragment = document.createDocumentFragment();
+			var myList = document.getElementById('myList');
+			
+			for(var i = 0;i < 3; i++) {
+				var li = document.createElement('li');
+				li.appendChild(document.createTextNode('Item' + (i+1)));
+				fragment.appendChild(li);
+				console.log(fragment);
+			}//没有在dom树上，加这些节点
+			myList.appendChild(fragment);//一次怕添加到dom树上
+			
+		</script>
+	</body>
+</html>

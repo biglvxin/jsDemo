@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.1.3窗口位置</title>
+	</head>
+	<body>
+		<script>
+			var leftPos = (typeof window.screenLeft == 'number')?window.screenLeft:window.screenX;
+			var topPos = (typeof window.screenTop == 'number')?window.screenTop:window.screenY;
+			console.log(leftPos);
+			console.log(topPos);
+//			window.moveTo(200,200);//新位置
+			window.moveBy(100,100);//移动的位置
+		</script>
+	</body>
+</html>
