@@ -1,1 +1,1 @@
-# jsDemo
+# javaScript learn demo
