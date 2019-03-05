@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.3.1DOM中的事件对象</title>
+	</head>
+	<body>
+		<input type="button"  id="myBtn" value="DOM中的事件对象" />
+		<div id="show"></div>
+		<script>
+			let btn = document.getElementById('myBtn');
+			let div = document.getElementById("show");
+			btn.onclick = function(event) {
+				alert(event.type);//click
+				div.innerText = event.type;
+			}
+			btn.addEventListener('click', function(event) {
+				alert(event.type);//click
+			},false);
+		</script>
+		<input type="button"  id="myBtn1" value="click me1"  onclick="alert(event.type)"/>
+		<script>
+			/**
+			 * 1.this:当前元素
+			 * 2.target：目标元素，只有元素上添加了事件
+			 * 3.currentTarget:当前元素，元素上一定有事件
+			 */
+			/**********************1.this,target,currentTarget的关系  当前元素具有onclick事件*****************************/
+			let btn1 = document.getElementById('myBtn1');
+			btn1.onclick = function(event) {
+				alert(event.currentTarget === this);//true
+				alert(event.target === this);//true
+				console.log(event.currentTarget);
+				console.log(event.target);
+				console.log(this);//当前的元素btn1
+			}
+			/**********************2.this,target,currentTarget的关系  当前元素父元素响应onclick事件（冒泡）***************************/
+//			document.body.onclick = function(event) {
+//				alert(event.currentTarget === document.body);//true;
+//				alert(this === document.body);//true;
+//				alert(document.body === this);//true;
+//				alert(event.target === document.getElementById('myBtn1'));//true;
+//				alert(event.target != this);//true
+//				alert(event.target != event.currentTarget);//true
+//			}
+		</script>
+		<input type="button" id="myBtn2" value="more event" />
+		<script>
+			/**********************3.多个事件处理  伪类样式****************************************/
+			let btn2 = document.getElementById("myBtn2");
+			let handler = function(event) {
+				switch (event.type) {
+					case 'click':
+					alert('clicked!');
+					break;
+					case 'mouseover':
+					event.target.style.backgroundColor = 'red';
+					break;
+					case 'mouseout':
+					event.target.style.backgroundColor = '';
+					break;
+				}
+			}
+			btn2.onclink = handler;
+			btn2.onmouseover = handler;
+			btn2.onmouseout = handler;
+		</script>
+		<a href="http://www.baidu.com" id="myLink">百度</a>
+		<script>
+			/*********************4.取消事件默认行为preventDefault()********************************/
+			let a = document.getElementById("myLink");
+			//取消事件默认行为后，不再跳转到百度
+			a.onclick = function(event) {
+				event.preventDefault();
+			}
+		</script>
+		
+		<input type="button" id="myBtn5" value="子点击事件" />
+		<script>
+			/*********************5.阻止事件冒泡stopPropagation()********************************/
+			let btn5 = document.getElementById("myBtn5");
+			btn5.onclick = function(event) {
+				alert('Clicked btn5!');
+				//本来document.body也会响应点击事件
+				event.stopPropagation();
+			}
+			document.body.onclick = function(event) {
+				alert("Body click!");
+			}
+		</script>
+		<input type="button" id="myBtn6" value="事件流位于哪一个阶段" />
+		<script>
+			/*********************6.判断事件流位于哪一个阶段********************************/
+			let btn6 = document.getElementById("myBtn6");
+	
+			document.body.addEventListener('click',function(event) {
+				alert(event.eventPhase);//捕获阶段 1
+			},true);
+			
+			btn6.onclick = function(event) {
+				alert(event.eventPhase);//处于目标  2 事件处理程序
+			}
+			document.body.onclick = function(event) {
+				alert(event.eventPhase);//冒泡 3
+			}
+		</script>
+	</body>
+</html>

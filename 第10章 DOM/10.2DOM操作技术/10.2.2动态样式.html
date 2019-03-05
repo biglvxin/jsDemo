@@ -2,8 +2,76 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>10.2.2动态样式</title>
+		<title>10.2.1动态样式</title>
 	</head>
 	<body>
+		<!--<link rel="stylesheet" type="text/css" href="10.2.1动态样式.css">-->
+		<!--
+			<style type="text/css">
+				body {
+					background-color: red;
+				}
+			</style>
+		-->
+		<script>
+			/**
+			 *  Firefox、Safari、Chrome 和 Opera,IE中可以正常运行
+			 * 	
+			 */
+			/*******************1.href***************************/
+			
+//			var link = document.createElement("link");
+//			link.rel = "stylesheet";
+//			link.type = "text/css";
+//			link.href = "10.2.1动态样式.css";
+//			var head = document.getElementsByTagName("head")[0];
+//			head.appendChild(link);
+			//封装以上代码
+			function loadCSS1(url) {
+				var link = document.createElement("link");
+				link.rel = "stylesheet";
+				link.type = "text/css";
+				link.href = url;
+				var head = document.getElementsByTagName("head")[0];
+				head.appendChild(link);
+			}
+			loadCSS1("10.2.1动态样式.css");		
+			/***********************2.行内的********************************/
+//			var style = document.createElement("style");
+//			style.type = "text/css";
+//			style.appendChild(document.createTextNode("body{background-color:red}"));
+//			var head = document.getElementsByTagName("head")[0];
+//			head.appendChild(style);
+
+			function loadCSS2(css) {
+				var style = document.createElement("style");
+				style.type = "text/css";
+				style.appendChild(document.createTextNode(css));
+				var head = document.getElementsByTagName("head")[0];
+				head.appendChild(style);
+			}
+			var css = "body{background-color:bule;}";
+			loadCSS2(css);
+			
+			
+			/*************************3.兼容性写法*************************************/
+			/**
+			 * 3.1.text 有浏览器不支持，给script加文本节点浏览器有的也不兼容
+			 */
+			function loadCSS3(css) {
+				var style = document.createElement("style");
+				style.type = "text/css";
+				 try {
+				 	style.appendChild(document.createTextNode(css));
+				 } catch (error) {
+				 	style.styleSheet.cssText = css;
+				 }
+
+				var head = document.getElementsByTagName("head")[0];
+				head.appendChild(style);
+			}
+			var css = "body{background-color:bule;}";
+			loadCSS3(css);
+		</script>
 	</body>
 </html>

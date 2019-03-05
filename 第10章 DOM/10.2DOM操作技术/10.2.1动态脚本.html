@@ -5,5 +5,69 @@
 		<title>10.2.1动态脚本</title>
 	</head>
 	<body>
+		<!--<script type="text/javascript" src="10.2.1动态脚本.js"></script>-->
+		<!--
+			<script type="text/jsavscript">
+				function sayHello2() {
+					alert("sayHello2");
+				}
+				sayHello2();
+			</script>
+		-->
+		<script>
+			/**
+			 *  Firefox、Safari、Chrome 和 Opera,IE中可以正常运行
+			 * 	
+			 */
+			/*******************1.src***************************/
+			
+//			var script = document.createElement('script');
+//			script.type = "text/javascript";
+//			script.src = "10.2.1动态脚本.js";
+//			document.body.appendChild(script);
+			//封装以上代码
+			function loadScript1(url) {
+				var script = document.createElement('script');
+				script.type = "text/javascript";
+				script.src = url;
+				document.body.appendChild(script);
+			}
+			loadScript1("10.2.1动态脚本.js");
+			
+			/***********************2.行内的********************************/
+//			var script = document.createElement('script');
+//			script.type = "text/javascript";
+//			//var textNode = document.createTextNode("function sayHello3() {alert('sayHello3!')};sayHello3();");
+//			script.text = "function sayHello3() {alert('sayHello3!')};sayHello3();";
+//			//script.appendChild(textNode);
+//			document.body.appendChild(script);
+			
+			function loadScript2(code) {
+				var script = document.createElement('script');
+				script.type = "text/javascript";
+				script.text = code;
+				document.body.appendChild(script);
+			}
+			var code = "function sayHello4() {alert('sayHello4!')};sayHello4();";
+			loadScript2(code);
+			/*************************3.兼容性写法*************************************/
+			/**
+			 * 3.1.text 有浏览器不支持，给script加文本节点浏览器有的也不兼容
+			 */
+			function loadScript3(code) {
+				var script = document.createElement('script');
+				script.type = "text/javascript";
+				 try {
+				 	var textNode = document.createTextNode(code);
+				 	script.appendChild(textNode);
+				 } catch (error) {
+				 	script.text = code;
+				 }
+
+				document.body.appendChild(script);
+			}
+			var code = "function sayHello5() {alert('sayHello5!')};sayHello5();";
+			loadScript3(code);
+		</script>
 	</body>
 </html>

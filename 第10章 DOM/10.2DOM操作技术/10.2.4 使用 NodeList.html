@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.2.4 使用 NodeList</title>
+	</head>
+	<body>
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * NodeList是动态的
+		 */
+		// 死循环
+//		var divs = document.getElementsByTagName('div');
+//		var i,div;
+//		for (i = 0; i < divs.length; i++) {
+//			div = document.createElement('div');
+//			div.appendChild(document.createTextNode(i));
+//			document.body.appendChild(div);
+//		}
+		
+		
+		var divs = document.getElementsByTagName('div');
+		console.log(document.body.childNodes);
+		var i, div, len;
+		for (i = 0,len = divs.length; i < len; i++) {
+			div = document.createElement('div');
+			div.appendChild(document.createTextNode(i));
+			document.body.appendChild(div);
+		}
+		console.log(document.body.childNodes);
+	</script>
+</html>
