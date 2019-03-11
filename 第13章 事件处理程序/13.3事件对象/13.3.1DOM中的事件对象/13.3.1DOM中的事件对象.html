@@ -10,9 +10,14 @@
 		<script>
 			let btn = document.getElementById('myBtn');
 			let div = document.getElementById("show");
+			/**
+			 * 
+			 * @param {Object} event:event 即可以传入，也可以作为window对象的一个属性
+			 */
 			btn.onclick = function(event) {
 				alert(event.type);//click
 				div.innerText = event.type;
+				console.log(window.event.type);
 			}
 			btn.addEventListener('click', function(event) {
 				alert(event.type);//click

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.3.2IE中的事件对象</title>
+	</head>
+	<body>
+		<input type="button" id="myBtn1" value="click my1"/>
+		<script>
+			let btn1 = document.getElementById("myBtn1");
+			/*
+			 * event 即可以传入，也可以作为window对象的一个属性
+			 */
+			btn1.onclick = function(e) {
+				alert(e.type);
+				let event = window.event;
+				alert(event.type);
+			}
+			btn1.attachEvent('onclick', function(event) {
+				alert(event.type);
+			});
+		</script>
+		<input type="button" id="myBtn2" value="click my2" />
+		<script>
+			let btn2 = document.getElementById("myBtn2");
+			btn2.onclick = function() {
+				alert(window.event.srcElement === this);//true;
+			}
+			btn2.attachEvent('onclick', function(event) {
+				alert(event.srcElement === this);//false
+			});
+			
+		</script>
+		<input type="button" id="myBtn3" value="click my3" onclick="alert(event.type)"/>
+	</body>
+</html>
