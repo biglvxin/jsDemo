@@ -22,10 +22,12 @@
 		</script>
 		<input type="button" id="myBtn2" value="click my2" />
 		<script>
+			//srcElement 相当于目标元素(target) this不一定指事件目标
 			let btn2 = document.getElementById("myBtn2");
 			btn2.onclick = function() {
 				alert(window.event.srcElement === this);//true;
 			}
+			//调试时这个方式没有响应，出错，未知什么情况 
 			btn2.attachEvent('onclick', function(event) {
 				alert(event.srcElement === this);//false
 			});
