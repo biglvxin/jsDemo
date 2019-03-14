@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>13.3.3跨浏览器的事件对象</title>
-	</head>
-	<body>
-		<input type="button" id="myBtn1"  value="click me"/>
-		<script>
-			let EventUtil = {
+(function(e) {
+	let EventUtil = {
 				//绑定事件
 				addHandler: function(element, type, handler) {
 					if(element.addEventListener) {
@@ -51,41 +43,7 @@
 					}
 				}
 			}
-			let btn1 = document.getElementById("myBtn1");
-			btn1.onclick = function(event) {
-				let e = EventUtil.getEvent(event);
-				alert(e);
-				console.log(e);
-				let target = EventUtil.getTarge(event);
-				alert(target);
-				console.log(target);
-			}
-		</script>
-		<a href="https://www.baidu.com/" id="myLink">IE取消默认行为</a>
-	<script>
 	
-		let myLink = document.getElementById("myLink");
-		myLink.onclick = function(e) {
-			let event = EventUtil.getEvent(e);
-			EventUtil.preventDefault(event);
+	window.EventUtil = EventUtil;
 		
-		}
-	</script>
-	<div class="parent" id="parent">
-		<input type="button" value="click my4" id="myBtn4"/>
-	</div>
-	<script>
-		
-		let parent = document.getElementById("parent");
-		let btn4 = document.getElementById("myBtn4");
-		btn4.onclick = function(e) {
-			alert("click child");
-			let event = EventUtil.getEvent(e);
-			EventUtil.stopPropagation(event);
-		}
-		parent.onclick = function(e) {
-			alert("click parent");
-		}
-	</script>
-	</body>
-</html>
+})();

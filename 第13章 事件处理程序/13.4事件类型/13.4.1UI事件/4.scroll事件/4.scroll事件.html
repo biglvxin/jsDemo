@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>4.scroll事件</title>
+		<script src="../EventUtil.js"></script>
+	</head>
+	<body>
+		<div calss="div" style="width:100px;height: 50px;word-wrap:break-word; overflow-y: auto;">122222222222222222222222222222222222222222222222222222222222222222222222222222</div>
+		<script>
+			alert(document.compatMode);
+			console.log(window.EventUtil);
+			window.EventUtil.addHandler(window, "scroll", function(e) {
+				if (document.compatMode == "CSS1Copmpat") {
+					alert(document.documentElement.scrollTop);//标准模式
+				} else {
+					alert(document.body.scrollTop);//混合模式
+				}
+			});
+		</script>
+	</body>
+</html>

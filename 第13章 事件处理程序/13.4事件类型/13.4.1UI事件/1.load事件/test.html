@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="parent" id="parent">
+			
+			<div class="child1">
+				<img src="load.jpg" id="img1" />
+			</div>
+			
+			<div class="child2">
+				<img src="load.jpg" id="img2" />
+			</div>
+			
+		</div>
+		<script>
+			let parent = document.getElementById("parent");
+			let img1 = document.getElementById("img1");
+			let img2 = document.getElementById("img2");
+			//不执行，onload不对HTML执行
+			parent.onload = function(e) {
+				alert("parent loaded!");
+			}
+			//img1和img2异步操作，执行顺序不一定
+			img1.onload = function(e) {
+				alert("img1 loaded!");
+			}
+			img2.onload = function(e) {
+				alert("img2 loaded!");
+			}
+			
+		</script>
+	</body>
+</html>

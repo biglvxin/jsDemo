@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>1.load事件</title>
+	</head>
+	<body onload="alert('body loaded!')">
+		<script>
+			let EventUtil = {
+				//绑定事件
+				addHandler: function(element, type, handler) {
+					if(element.addEventListener) {
+						element.addEventListener(type, handler, false);//DOM2 事件处理程序
+					} else if (element.attachEvent) {
+						element.attachEvent('on' + type, handler);//IE 事件处理程序
+					} else {
+						element["on" + type] = handler; //DOM0 事件处理程序
+					}
+				},
+				//解绑事件
+				removeHandler: function(element, type, handler) {
+					if(element.removeEventListener) {
+						element.removeEventListener(type, handler, false);//DOM2 事件处理程序
+					} else if(element.detachEvent) {
+						element.detachEvent('on' + type, handler);//IE 事件处理程序
+					} else {
+						element["on" + type] = null;//DOM0 事件处理程序
+					}
+				},
+				//得到事件对象
+				getEvent: function(event) {
+					//存在event就为DOM事件对象，不存在为window.event 为IE事件对象
+					return event ? event: window.event;
+				},
+				getTarge: function(event) {
+					return event ? event.target : event.srcElement;
+				},
+				preventDefault: function(event) {
+					if (event.preventDefault) {
+						event.preventDefault();
+					} else {
+						event.returnValue = false;//IE 事件对象 取消默认行为
+					}
+				},
+				stopPropagation: function(event) {
+					if (event.stopPropagation) {
+						event.stopPropagation();
+					} else {
+						event.cancelBubble = true; //IE 事件对象 取消冒泡
+					}
+				}
+			}
+		
+		</script>
+		
+		<script>
+			/** load事件：
+			 * 1.当页面完全加载后（包括所有图像、JavaScript 文件、CSS 文件等外部资源），就会触发 window 上面的 load 事件。
+			 * 2.在不同对象即HTML上有相同的事件触发，先执行子HTML上的事件，冒泡过程
+			 */
+			EventUtil.addHandler(window,"load", function(event) {
+				alert("window loaded!");
+			});
+		</script>
+		
+		 <img src="load.jpg" onload="alert('img1 loaded!')" id="img1" />
+		 <script>
+		 	let img1 = document.getElementById('img1');
+		 	EventUtil.addHandler(img1, "load", function(e) {
+		 		let event = EventUtil.getEvent(e);
+		 		let targe = EventUtil.getTarge(event);
+		 		alert("img1:" + targe.src);//load.jpg
+		 	});
+		 	
+		 </script>
+		 
+		 <img id="img2"  />
+		 <script>
+		 	/**
+		 	 * 1.为了确保img2加载完毕，可以动态的添加图片
+		 	 * 
+		 	 */
+		 	let img2 = document.getElementById("img2");
+		 	EventUtil.addHandler(img2, "load", function(e) {
+		 		let event  = EventUtil.getEvent(e);
+		 		let targe = EventUtil.getTarge(event);
+		 		alert("img2:" + targe.src);
+		 	});
+		 	img2.src = "load.jpg";
+		 </script>
+		 
+		 <div class="img3" id="img3" onload="alert('div3 loaded test!')"></div>
+		 <script>
+		 	/**
+		 	 * onload事件不执行HTML
+		 	 */
+		 	let div3 = document.getElementById("img3");
+		 	EventUtil.addHandler(div3, "load", function(e) {
+		 		alert("div3 loaded!");
+		 		let img3 = new Image();
+		 		EventUtil.addHandler(img3, "load", function(e) {
+		 			alert("img3 loaded!");
+		 		});
+		 		img3.src = "load.jpg";
+		 		
+		 	});
+		 </script>
+		
+		 <script>
+		 	EventUtil.addHandler(window, "load", function(e) {
+		 		alert("window img4 loaded!");//执行
+		 		let img4 = new Image();
+		 		EventUtil.addHandler(img4, "load", function(e) {
+		 			alert("img4 loaded!");//执行
+		 		});
+		 		img4.src = "load.jpg";//无法在dom中显示
+		 		
+		 	});
+		 </script>
+		 
+		<script>
+			/**
+			 * 这样写加载外部资源js，写的位置可以是任意地方 
+			 */
+		 	EventUtil.addHandler(window, "load", function(e) {
+		 		alert("window js loaded!");
+		 		let script = document.createElement("script");
+		 		EventUtil.addHandler(script, "load", function(e) {
+		 			alert("js loaded!");
+		 		});
+		 		script.src = "example.js";
+		 		document.body.appendChild(script);
+		 	});
+		</script>
+		
+		<script>
+			/**
+			 * 这样写加载外部资源css，写的位置可以是任意地方 
+			 */
+			EventUtil.addHandler(window, "load", function(){
+				alert("window css loaded!");
+				let link = document.createElement("link");
+				link.type = "text/css";
+				link.rel= "stylesheet";
+				EventUtil.addHandler(link, "load", function(event){
+					alert("css loaded");
+				});
+				link.href = "example.css";
+				document.getElementsByTagName("head")[0].appendChild(link);
+			});
+		</script>
+		 
+		 
+		 
+		 
+	</body>
+</html>
