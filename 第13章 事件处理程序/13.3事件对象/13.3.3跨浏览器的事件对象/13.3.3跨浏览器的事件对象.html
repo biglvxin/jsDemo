@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.3.3跨浏览器的事件对象</title>
+	</head>
+	<body>
+		<input type="button" id="myBtn1"  value="click me"/>
+		<script>
+			let EventUtil = {
+				//绑定事件
+				addHandler: function(element, type, handler) {
+					if(element.addEventListener) {
+						element.addEventListener(type, handler, false);//DOM2 事件处理程序
+					} else if (element.attachEvent) {
+						element.attachEvent('on' + type, handler);//IE 事件处理程序
+					} else {
+						element["on" + type] = handler; //DOM0 事件处理程序
+					}
+				},
+				//解绑事件
+				removeHandler: function(element, type, handler) {
+					if(element.removeEventListener) {
+						element.removeEventListener(type, handler, false);//DOM2 事件处理程序
+					} else if(element.detachEvent) {
+						element.detachEvent('on' + type, handler);//IE 事件处理程序
+					} else {
+						element["on" + type] = null;//DOM0 事件处理程序
+					}
+				},
+				//得到事件对象
+				getEvent: function(event) {
+					//存在event就为DOM事件对象，不存在为window.event 为IE事件对象
+					return event ? event: window.event;
+				},
+				getTarge: function(event) {
+					return event ? event.target : event.srcElement;
+				},
+				preventDefault: function(event) {
+					if (event.preventDefault) {
+						event.preventDefault();
+					} else {
+						event.returnValue = false;
+					}
+				},
+				stopPropagation: function(event) {
+					if (event.stopPropagation) {
+						event.stopPropagation();
+					} else {
+						event.cancelBubble = true;
+					}
+				}
+			}
+			let btn1 = document.getElementById("myBtn1");
+			btn1.onclick = function(event) {
+				let e = EventUtil.getEvent(event);
+				alert(e);
+				console.log(e);
+				let target = EventUtil.getTarge(event);
+				alert(target);
+				console.log(target);
+			}
+		</script>
+		<a href="https://www.baidu.com/" id="myLink">IE取消默认行为</a>
+	<script>
+	
+		let myLink = document.getElementById("myLink");
+		myLink.onclick = function(e) {
+			let event = EventUtil.getEvent(e);
+			EventUtil.preventDefault(event);
+		
+		}
+	</script>
+	<div class="parent" id="parent">
+		<input type="button" value="click my4" id="myBtn4"/>
+	</div>
+	<script>
+		
+		let parent = document.getElementById("parent");
+		let btn4 = document.getElementById("myBtn4");
+		btn4.onclick = function(e) {
+			alert("click child");
+			let event = EventUtil.getEvent(e);
+			EventUtil.stopPropagation(event);
+		}
+		parent.onclick = function(e) {
+			alert("click parent");
+		}
+	</script>
+	</body>
+</html>

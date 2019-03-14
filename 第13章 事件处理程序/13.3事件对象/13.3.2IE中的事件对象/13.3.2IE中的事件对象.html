@@ -34,5 +34,34 @@
 			
 		</script>
 		<input type="button" id="myBtn3" value="click my3" onclick="alert(event.type)"/>
+		
+	<a href="https://www.baidu.com/" id="myLink">IE取消默认行为</a>
+	<script>
+		/**
+		 * IE取消默认行为
+		 */
+		let myLink = document.getElementById("myLink");
+		myLink.onclick = function(e) {
+			window.event.returnValue = false;
+		
+		}
+	</script>
+	<div class="parent" id="parent">
+		<input type="button" value="click my4" id="myBtn4"/>
+	</div>
+	<script>
+		/**
+		 * IE阻止冒泡:会alert两次，现在只alert child的。
+		 */
+		let parent = document.getElementById("parent");
+		let btn4 = document.getElementById("myBtn4");
+		btn4.onclick = function(e) {
+			alert("click child");
+			window.event.cancelBubble = true;
+		}
+		parent.onclick = function(e) {
+			alert("click parent");
+		}
+	</script>
 	</body>
 </html>
