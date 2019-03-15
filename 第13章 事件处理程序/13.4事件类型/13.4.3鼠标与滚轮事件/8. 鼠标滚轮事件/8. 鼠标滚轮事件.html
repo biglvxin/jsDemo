@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8. 鼠标滚轮事件</title>
+		<script src="../EventUtil.js"></script>
+	</head>
+	<body>
+		<script>
+			/**
+			 * +120:向上
+			 * -120:向下
+			 */
+			window.EventUtil.addHandler(document, "mousewheel", function(event){
+				event = window.EventUtil.getEvent(event);
+				alert(event.wheelDelta);
+				//在 Opera 9.5 之前的版本中， wheelDelta 值的正负号是颠倒的
+				//let delta = (client.engine.opera && client.engine.opera < 9.5 ? -event.wheelDelta : event.wheelDelta);//client要了解客户端检验
+				//console.log(delta);
+			});
+			/**//Firefox
+			 * +30：
+			 * -30：
+			 */
+			window.EventUtil.addHandler(window, "DOMMouseScroll", function(event){
+				event = window.EventUtil.getEvent(event);
+				alert(event.detail);
+			});
+		</script>
+	</body>
+</html>

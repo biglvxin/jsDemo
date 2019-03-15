@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>6. 鼠标按钮</title>
+		<script src="../EventUtil.js"></script>
+		<style>
+			#div6 {
+				width:100px;
+				height: 100px;
+				background-color:#00FF00;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div6"></div>
+		<script>
+			let div6 = document.getElementById("div6");
+			window.EventUtil.addHandler(div6, "mousedown", function(event) {
+				event = window.EventUtil.getEvent(event);
+				alert("event.button = " + window.EventUtil.getButton(event));
+			});
+		</script>
+	</body>
+</html>

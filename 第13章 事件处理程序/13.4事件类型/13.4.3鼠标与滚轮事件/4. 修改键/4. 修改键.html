@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>4. 修改键</title>
+		<script src="../EventUtil.js"></script>
+		<style>
+			.div4 {
+				height: 200px;
+				width:200px;
+				border:1px solid #00FF00;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div4" id="div4"></div>
+		<script>
+			/**
+			 * 按下键盘去用鼠标点击，会显示按下哪个键盘
+			 */
+				let div4 = document.getElementById("div4");
+				window.EventUtil.addHandler(div4, "click", function(e) {
+				let event = window.EventUtil.getEvent(e);
+				let keys = new Array();
+				
+				if (event.shiftKey) {
+					keys.push("shift");
+				}
+				if (event.altKey) {
+					keys.push("alt");
+				}
+				if (event.ctrlKey) {
+					keys.push("ctrl");
+				}
+				if (event.metaKey) {
+					keys.push("meta");
+				}
+				alert("keys:" + keys.join(','));
+			})
+		</script>
+	</body>
+</html>

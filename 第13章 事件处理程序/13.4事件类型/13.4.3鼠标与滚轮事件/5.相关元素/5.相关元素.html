@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>5.相关元素</title>
+		<script src="../EventUtil.js"></script>
+		<style>
+			#div5 {
+				width:100px;
+				height: 100px;
+				background-color: #FF0000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div5"></div>
+		<script>
+			/*
+			 *目标元素相对的元素称为相关元素
+			 */
+			let div5 = document.getElementById("div5");
+			window.EventUtil.addHandler(div5, "mouseout", function(event){
+				console.log(event);
+				event = window.EventUtil.getEvent(event);
+				let target = window.EventUtil.getTarget(event);
+				relatedTarget = window.EventUtil.getRelatedTarget(event);
+				/**
+				 * target.tagName  div 目标元素
+				 * relatedTarget.tagName body相关元素
+				 */
+				
+				alert("Moused out of " + target.tagName + " to " + relatedTarget.tagName); //Moused out of DIV to BODY
+			});
+			
+		</script>
+	</body>
+</html>

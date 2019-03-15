@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>2.页面坐标位置</title>
+		<script src="../EventUtil.js"></script>
+		<style>
+			* {
+				margin:0;
+				padding:0;
+			}
+			.body {
+				width:100%;
+				height: 100%;
+			}
+			#myDiv2,.myDiv2 {
+				height: 2000px;
+				width:100%;
+				border: 1px solid #FF0000;
+			}
+			.myDiv2 {
+				margin-top:100px;
+				border:2px solid #00ff00;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myDiv2"></div>
+		<script>
+			/**
+			 * 整个网页包括滚动未显示的地方点击的位置x,y的距离 pageX,pageY
+			 */
+			let div2 = document.getElementById("myDiv2");
+			window.EventUtil.addHandler(div2, "click", function(e) {
+				let event = window.EventUtil.getEvent(e);
+				alert("pageX:" + event.pageX + "pageY:" + event.pageY);
+			})
+		</script>
+		<div class="myDiv2" id="myDiv22"></div>
+		<script>
+			/**
+			 * 浏览器不支持pageX,pageY的方法用scrollLeft,scrollTop来获取
+			 * clientX + scrollLeft = pageX;
+			 * clientY + scrollTop = pageY;
+			 */
+			let div22 = document.getElementById("myDiv22");
+			window.EventUtil.addHandler(div22, "click", function(e) {
+				let event = window.EventUtil.getEvent(e);
+				let pageX = event.pageX;
+				let pageY = event.pageY;
+				if (pageX === undefined) {
+					pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+				}
+				if (pageY === undefined) {
+					pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+				}
+				alert("clientX + scrollLeft :" + pageX + "clientY + scrollTop :" + pageY);
+			})
+		</script>
+	</body>
+</html>
